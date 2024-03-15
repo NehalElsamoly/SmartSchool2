@@ -71,6 +71,7 @@ class NewsContent extends StatelessWidget {
                   child: Image.network(
                     image??"",
                     fit: BoxFit.cover,
+                    //nehal
                     width: MediaQuery.of(context).size.width / 4,
                     height: MediaQuery.of(context).size.height / 7,
                   ),
