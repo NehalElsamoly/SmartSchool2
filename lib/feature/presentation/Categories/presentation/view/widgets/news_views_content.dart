@@ -68,7 +68,7 @@ class NewsContent extends StatelessWidget {
                 margin: EdgeInsets.only(left: 12.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15.0),
-                  child: Image.asset(
+                  child: Image.network(
                     image??"",
                     fit: BoxFit.cover,
                     width: MediaQuery.of(context).size.width / 4,

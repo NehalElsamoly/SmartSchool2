@@ -49,115 +49,108 @@ class _NewsViewState extends State<NewsView> {
                     )
                   ],
                 ),
-                body: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        height: MediaQuery.of(context).size.height / 30,
-                        padding: const EdgeInsets.only(left: 13.0, right: 13.0),
-                        margin: const EdgeInsets.only(top: 15.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Top News",
-                              style: Styles.style18.copyWith(
-                                fontWeight: FontWeight.w500,
-                                color: texttitlecontent,
-                              ),
+                body: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: MediaQuery.of(context).size.height / 30,
+                      padding: const EdgeInsets.only(left: 13.0, right: 13.0),
+                      margin: const EdgeInsets.only(top: 15.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Top News",
+                            style: Styles.style18.copyWith(
+                              fontWeight: FontWeight.w500,
+                              color: texttitlecontent,
                             ),
-                            Text(
-                              "View all",
-                              style: Styles.style18.copyWith(
-                                fontWeight: FontWeight.w400,
-                                color: textcontent,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        padding: const EdgeInsets.only(top: 10.0),
-                        child: Row(
-                          textDirection: TextDirection.ltr,
-                          children: [
-                            ListView.builder(
-                              scrollDirection: Axis.vertical,
-                              itemCount: state.newsModel?.categories?.length ?? 0,
-                              itemBuilder: (context, index) {
-                                final category = state.newsModel?.categories?[index];
-                                if (category == null) {
-                                  print("error catogries");
-                                  return SizedBox.shrink(); // or display a placeholder widget
-                                }
-                               else {
-                                  return NewsContent(
-                                    title: category.photo??"",
-                                    description: category.name ?? '',
-                                    image: 'appointment',
-                                  );
-                                }
-                              },
-                            ),
-
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 40,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          "Protection",
-                          style: Styles.style30.copyWith(
-                            fontWeight: FontWeight.w500,
-                            color: texttitlecontent,
                           ),
-                        ),
+                          Text(
+                            "View all",
+                            style: Styles.style18.copyWith(
+                              fontWeight: FontWeight.w400,
+                              color: textcontent,
+                            ),
+                          ),
+                        ],
                       ),
-                      ListView.builder(
-                        scrollDirection: Axis.vertical,
+                    ),
+                    SizedBox(
+                      height: 300,
+                     // width: 200,
+                      child: ListView.builder(
+                      //  scrollDirection: Axis.vertical,
                         itemCount: state.newsModel?.categories?.length ?? 0,
                         itemBuilder: (context, index) {
                           final category = state.newsModel?.categories?[index];
                           if (category == null) {
                             print("error catogries");
-
+                            return SizedBox.shrink(); // or display a placeholder widget
+                          }
+                         else {
+                            return NewsContent(
+                              title: category.photo??"",
+                              description: category.name ?? '',
+                              image: category?.news?.first?.photos?.first.name ?? '',
+                            );
+                          }
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 40,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "Protection",
+                        style: Styles.style30.copyWith(
+                          fontWeight: FontWeight.w500,
+                          color: texttitlecontent,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListView.builder(
+                       // scrollDirection: Axis.vertical,
+                        itemCount: state.newsModel?.categories?.length ?? 0,
+                        itemBuilder: (context, index) {
+                          final category = state.newsModel?.categories?[index];
+                          if (category == null) {
+                            print("error catogries");
+                      
                             return SizedBox.shrink(); // or display a placeholder widget
                           }
                           return NewsContent(
                             title: category.name??"",
                             description: category.name ?? '',
-                            image: 'appointment',
+                            image: category?.news?.first?.photos?.first.name ?? '',
                           );
                         },
                       ),
-                      // child: ListView.builder(
-                      //   scrollDirection: Axis.vertical,
-                      //   itemCount: state.newsModel?.categories?.length ?? 0,
-                      //   itemBuilder: (context, index) {
-                      //     return ListView.builder(
-                      //       shrinkWrap: true,
-                      //       physics: NeverScrollableScrollPhysics(),
-                      //       itemCount: state.newsModel?.categories![index].news?.length ?? 0,
-                      //       itemBuilder: (context, newsIndex) {
-                      //         return NewsContent(
-                      //           title: state.newsModel?.categories![index].news![newsIndex].title ?? '',
-                      //           description: state.newsModel?.categories![index].news![newsIndex].content ?? '',
-                      //           image: state.newsModel?.categories![index].news![newsIndex].photos[0].name ?? '',
-                      //         );
-                      //       },
-                      //     );
-                      //   },
-                      // ),
+                    ),
+                    // child: ListView.builder(
+                    //   scrollDirection: Axis.vertical,
+                    //   itemCount: state.newsModel?.categories?.length ?? 0,
+                    //   itemBuilder: (context, index) {
+                    //     return ListView.builder(
+                    //       shrinkWrap: true,
+                    //       physics: NeverScrollableScrollPhysics(),
+                    //       itemCount: state.newsModel?.categories![index].news?.length ?? 0,
+                    //       itemBuilder: (context, newsIndex) {
+                    //         return NewsContent(
+                    //           title: state.newsModel?.categories![index].news![newsIndex].title ?? '',
+                    //           description: state.newsModel?.categories![index].news![newsIndex].content ?? '',
+                    //           image: state.newsModel?.categories![index].news![newsIndex].photos[0].name ?? '',
+                    //         );
+                    //       },
+                    //     );
+                    //   },
+                    // ),
 
-                    ],
-                  ),
+                  ],
                 ),
                 bottomNavigationBar: const BottomNaviatonBar());
           } else {

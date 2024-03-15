@@ -1,6 +1,6 @@
 // images
 import 'package:flutter/material.dart';
-const String baseurl = "http://127.0.0.1:8000";
+const String baseurl = "http://10.0.2.2:8000";
 const String correct = "assets/icons/Check.svg";
 const String logoIc = "assets/icons/logo.svg";
 const String translateIc = "assets/icons/translate.svg";

@@ -34,15 +34,15 @@ int ?initScreen;
 void main() async{
   WidgetsFlutterBinding.ensureInitialized(); // Ensure Flutter is initialized
   SharedPreferences preferences= await SharedPreferences.getInstance();
-  initScreen=await preferences.getInt("initScreen");
   await preferences.setInt("initScreen", 1);
+  initScreen=await preferences.getInt("initScreen")??1;
   //await CacheHelper.init();
    Widget ?widget;
   SharedPreferences prefs = await SharedPreferences.getInstance();
   if (initScreen ==0|| initScreen ==null) {
-    widget = Onbording();
+    widget = const Onbording();
     //GoRouter.of(context).push(OnboardingScreen.routeName);
-  } else if (prefs.getString('auth-token')!.isEmpty ||
+  } else if (prefs.getString('auth-token')?.isEmpty??false ||
       prefs.getString('auth-token') == null) {
     widget = Login();
   } else {
@@ -52,10 +52,10 @@ void main() async{
     // String userType=context.read<AuthCubit>().getUserType();
     //String? userType = await context.read<AuthCubit>().getUserType();
     if(Usertype == 'parent') {
-      widget= ForgetPassword();
+      widget= const ForgetPassword();
 
     } else {
-  widget= ForgetPassword();
+  widget= const ForgetPassword();
 
   }
   }
@@ -141,7 +141,7 @@ class MyApp extends StatelessWidget {
         ],
         supportedLocales: localizationDelegate.supportedLocales,
         locale: localizationDelegate.currentLocale,
-  home:NewsView()
+  home: NewsView()
   // home:AnouncmentView(),
    // home:WelcomeStarting(),
     // home:startWidget
@@ -193,7 +193,7 @@ final lightThemeData = ThemeData(
   brightness: Brightness.light,
   scaffoldBackgroundColor: Colors.blue,
   primaryColor: Colors.blue, // Example primary color
-  textTheme: TextTheme(
+  textTheme: const TextTheme(
     bodyText1: TextStyle(color: Colors.black), // Example text color
   ),
 );
@@ -202,7 +202,7 @@ final darkThemeData = ThemeData(
   brightness: Brightness.dark,
   scaffoldBackgroundColor: Colors.black,
   primaryColor: Colors.green, // Example primary color
-  textTheme: TextTheme(
+  textTheme: const TextTheme(
     bodyText1: TextStyle(color: Colors.white), // Example text color
   ),
 );

@@ -20,7 +20,7 @@ class ApiService {
     if (prefs.getString('auth-token') == null) {
       prefs.setString('auth-token', '');
     }
-    token = prefs.getString('auth-token');
+    token = prefs.getString('auth-token')??"";
 
     // Send a GET request to the specified endPoint by combining it with the base URL
     var response = await _dio.get(
